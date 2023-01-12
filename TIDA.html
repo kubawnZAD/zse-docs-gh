@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/qunit/2.19.3/qunit.js"
+      integrity="sha512-qHeU8QzxGqROdwA9ufR8kCfLxBU3OljWenEyQL2gERGVTKpoDdV0jRIUXWGy1M6gZADrIiFmCWOaPhv3exg2iw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/qunit/2.19.3/qunit.css"
+      integrity="sha512-BSoOOqiaId24Im9C+R1VrJBZWPSMEb9cEHsJ0sTxikqaO9yDVn70Bvz+FV3c9+HjSwCpCxPjwWjHn4DOOHaSvw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <style>
+    table {
+      border: 2px solid black;
+    }
+    td {
+      border: 1px solid black;
+    }
+    tr {
+      border: 1px solid black;
+    }
+  </style>
+  <body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <form action="" method="post">
+      Nazwa zadania: <input type="text" id="name" />
+      Termin oddania zadania
+      <input type="date" name="data" id="data" />
+      <input type="submit" value="utwórz" id="sbm" />
+    </form>
+  </body>
+  <script defer>
+    const submit = document.querySelector("#sbm");
+    const name = document.querySelector("#name");
+
+    submit.addEventListener("click", (e) => {
+      e.preventDefault();
+    });
+    submit.click();
+    name.textContent = "sprawdź";
+    createTable(name.value);
+    function createTable(td) {
+      const body = document.querySelector("body");
+      body.appendChild(document.createElement("table"));
+      document.querySelector("table").appendChild(document.createElement("tr"));
+      document.querySelector("tr").innerHTML = "nazwa zadania:";
+      document.querySelector("tr").appendChild(document.createElement("td"));
+      document.querySelector("td").innerHTML = td;
+    }
+
+    QUnit.test("poprawność danych", function (assert) {
+      const td = document.querySelector("td");
+      assert.equal(td.textContent, name.value, "Zgadza się");
+    });
+  </script>
+</html>
